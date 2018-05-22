@@ -43,9 +43,7 @@ app.all("/*", function(req, res, next) {
 
 
 app.post("/item",(req,res) => {
-	console.log('you posted to /item');
-	console.log(req.body);
-	console.log(mongodb);
+
 	dbo.collection('items').insert({name: req.body.name,
 					price: req.body.price,
 					gst: req.body.gst,
@@ -55,32 +53,13 @@ app.post("/item",(req,res) => {
 			if(err)
 				console.log(err);
 			else {
-				console.log("Done");
+
 				res.send('Done');
 			}
 		});
 })
 
-// app.post("/newItem",(req,res) => {
-// 	console.log('you posted to /newItem');
-// 	// console.log(req.body);
-// 	// console.log(mongodb);
-// 	var item = new Item();
-// 	item.name = req.body.name;
-//  	item.text = req.body.price;
-//  	item.gst = req.body.gst;
-//  	item.final_price = req.body.final_price;
-
-// 	item.save(function(err) {
-// 	 if (err)
-// 	 res.send(err);
-// 	 res.json({' message': 'Item successfully added!' });
-// 	 });
-	
-// })
-
 app.get("/allItems",(req,res) => {
-	console.log('/allItems');
 
     var collection = dbo.collection('items');
       collection.find().toArray(function(err, docs) {
